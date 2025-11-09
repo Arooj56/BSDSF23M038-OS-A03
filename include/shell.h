@@ -11,6 +11,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <dirent.h>
+#include <fcntl.h>
 
 #define MAX_LEN 512
 #define MAXARGS 10

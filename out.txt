@@ -1,0 +1,8 @@
+total 24
+drwxr-xr-x 2 arooj arooj 4096 Nov  9 22:05 bin
+drwxr-xr-x 2 arooj arooj 4096 Nov  9 21:55 include
+-rw-r--r-- 1 arooj arooj  218 Nov  9 21:55 Makefile
+drwxr-xr-x 2 arooj arooj 4096 Nov  9 13:24 obj
+-rw-r--r-- 1 arooj arooj    0 Nov  9 22:06 out.txt
+-rw-r--r-- 1 arooj arooj  769 Nov  8 12:31 README.md
+drwxr-xr-x 2 arooj arooj 4096 Nov  9 21:55 src
