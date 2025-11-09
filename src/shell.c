@@ -1,4 +1,6 @@
 #include "shell.h"
+char* history[HISTORY_SIZE];
+int history_count = 0;
 
 char* read_cmd(char* prompt, FILE* fp) {
     printf("%s", prompt);
@@ -93,6 +95,30 @@ int handle_builtin(char **args) {
         printf("Job control not yet implemented.\n");
         return 1;
     }
+	
+	else if (strcmp(args[0], "history") == 0) {
+		for (int i = 0; i < history_count; i++) {
+			printf("%d %s\n", i + 1, history[i]);
+		}
+		return 1;
+}
+
 
     return 0; // Not a built-in command
 }
+//Function to add in history
+void add_to_history(const char* cmdline) {
+    if (cmdline == NULL || strlen(cmdline) == 0)
+        return;
+
+    if (history_count < HISTORY_SIZE) {
+        history[history_count++] = strdup(cmdline);
+    } else {
+        // Free the oldest command and shift all others up
+        free(history[0]);
+        for (int i = 1; i < HISTORY_SIZE; i++)
+            history[i - 1] = history[i];
+        history[HISTORY_SIZE - 1] = strdup(cmdline);
+    }
+}
+
