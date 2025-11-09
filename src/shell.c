@@ -85,6 +85,9 @@ char** tokenize(char* cmdline) {
     return arglist;
 }
 
+// ----------------------
+// Completion generator
+// ----------------------
 char* command_completion_generator(const char* text, int state) {
     static int list_index, len;
     static DIR* dir = NULL;
@@ -130,3 +133,21 @@ char** command_completion(const char* text, int start, int end) {
     rl_attempted_completion_over = 1;
     return rl_completion_matches(text, command_completion_generator);
 }
+
+char** split_commands(char* line, int* count) {
+    char** commands = malloc(sizeof(char*) * (MAXARGS + 1));
+    char* token;
+    int idx = 0;
+
+    token = strtok(line, ";");
+    while (token != NULL && idx < MAXARGS) {
+        while (*token == ' ') token++; // skip leading spaces
+        commands[idx++] = strdup(token);
+        token = strtok(NULL, ";");
+    }
+    commands[idx] = NULL;
+    *count = idx;
+    return commands;
+}
+
+

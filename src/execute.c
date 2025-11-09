@@ -1,6 +1,7 @@
 #include "shell.h"
 
-int execute(char* arglist[]) {
+// execute.c
+int execute(char* arglist[], int is_background) {
     int status;
     int pipe_pos = -1;
 
@@ -69,10 +70,16 @@ int execute(char* arglist[]) {
         perror("Command not found");
         exit(1);
     } else if (pid > 0) {
-        waitpid(pid, &status, 0);
+        if (is_background) {
+			bg_pids[bg_count++] = pid;
+			printf("[BG] PID %d started\n", pid);
+		} else {
+			waitpid(pid, &status, 0);
+		}
         return 0;
     } else {
         perror("fork failed");
         return 1;
     }
+
 }
