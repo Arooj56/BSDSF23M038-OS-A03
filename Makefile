@@ -1,29 +1,13 @@
-# Compiler and Flags
 CC = gcc
-CFLAGS = -Iinclude -Wall
+CFLAGS = -Wall -g -I include
+SRC = src/main.c src/shell.c src/execute.c
+OUT = bin/myshell
+LDFLAGS = -lreadline
 
-# Folders
-SRC = src
-OBJ = obj
-BIN = bin
+all: $(OUT)
 
-# Files
-TARGET = $(BIN)/myshell
-SRC_FILES = $(SRC)/main.c $(SRC)/shell.c $(SRC)/execute.c
-OBJ_FILES = $(OBJ)/main.o $(OBJ)/shell.o $(OBJ)/execute.o
+$(OUT): $(SRC)
+	@$(CC) $(CFLAGS) -o $(OUT) $(SRC) $(LDFLAGS)
 
-# Default rule
-all: $(TARGET)
-
-# Build target
-$(TARGET): $(OBJ_FILES)
-	$(CC) $(OBJ_FILES) -o $(TARGET)
-
-# Compile source files to object files
-$(OBJ)/%.o: $(SRC)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Clean up build files
 clean:
-	rm -f $(OBJ)/*.o $(TARGET)
-
+	@rm -f $(OUT)
