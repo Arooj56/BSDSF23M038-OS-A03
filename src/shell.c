@@ -34,9 +34,10 @@ int handle_builtin(char **args) {
             perror("cd failed");
         }
         return 1;
-    } else if (strcmp(args[0], "help") == 0) {
-        printf("Built-in commands: cd, exit, help, jobs, history\n");
-        return 1;
+    }else if (strcmp(args[0], "help") == 0) {
+    	printf("Built-in commands:\n");
+    	printf("cd, exit, history, jobs, set, help\n");  // <-- added 'set'
+    	return 1;
     } else if (strcmp(args[0], "jobs") == 0) {
         printf("Job control not yet implemented.\n");
         return 1;
